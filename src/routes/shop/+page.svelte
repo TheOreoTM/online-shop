@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Avatar } from '@skeletonlabs/skeleton';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -8,21 +7,26 @@
 </script>
 
 <div class="logo-cloud grid grid-cols-2 md:grid-cols-6 gap-2">
-	{#each items as item}
+	{#each items as item (item.itemCode)}
 		<a
 			href={`/shop/item/${item.itemCode}`}
-			class="card bg-initial overflow-hidden"
+			class="card bg-initial overflow-hidden group"
 			data-sveltekit-preload-data="hover"
 		>
-			<header class="relative inline-block">
+			<header class="relative inline-block bg-white">
+				{#if parseInt(item.minqty) > parseInt(item.itemQty) && parseInt(item.itemQty) > 0}
+					<p class="badge absolute bottom-0 rounded-l-none left-0 z-10 bg-gray-500">Low Stock</p>
+				{:else if parseInt(item.itemQty) <= 0}
+					<p class="badge absolute bottom-0 rounded-l-none left-0 z-10 bg-red-500">Out of Stock</p>
+				{/if}
 				{#if item.discount}
-					<p class="badge absolute bottom-0 rounded-l-none left-0 z-10 bg-red-500">
+					<p class="badge absolute top-0 w-full rounded-none left-0 z-10 bg-red-500">
 						-{item.discount}% Discount
 					</p>
 				{/if}
 				<img
 					src={item.image}
-					class="bg-black/50 w-full aspect-[1/1]"
+					class="bg-white transform scale-50 transition-transform duration-200 group-hover:scale-100 w-full aspect-[1/1] group-hover:object-cover"
 					alt="{item.itemName}-preview"
 				/>
 			</header>

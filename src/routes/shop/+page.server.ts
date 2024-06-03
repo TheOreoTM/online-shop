@@ -2,7 +2,7 @@ import type { Item } from '$lib/types';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ fetch }) => {
-	const res = await fetch('/api/items');
+	const res = await fetch('/api/item');
 	const itemsData = (await res.json()) as Item[];
 	const items = itemsData.map((item) => {
 		return {
