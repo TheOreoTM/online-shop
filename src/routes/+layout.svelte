@@ -13,6 +13,12 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
+	import { Toaster } from '$lib/components/ui/sonner';
+
+	import { initializeStores, Toast } from '@skeletonlabs/skeleton';
+
+	initializeStores();
+
 	const navLinks = [
 		{ path: '/shop', label: 'Shop', isNew: true },
 		{ path: '/', label: 'Home' },
@@ -24,6 +30,7 @@
 	import PageTransition from '$lib/components/PageTransition.svelte';
 	import { page } from '$app/stores';
 	import { ShopName } from '$lib/constants';
+	import ShoppingCart from '$lib/components/ShoppingCart.svelte';
 
 	$: isActivePath = (path: string) => {
 		if (path === '/shop' && $page.url.pathname.startsWith('/shop')) {
@@ -36,6 +43,8 @@
 	export let data;
 </script>
 
+<ShoppingCart />
+<Toaster position="bottom-center" richColors />
 <!-- App Shell -->
 <AppShell
 	slotPageHeader="mx-auto container p-4 bg-transparent"

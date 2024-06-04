@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="flex flex-col md:flex-row md:space-x-6 md:items-center min-h-96 p-6 bg-gradient-to-r from-white via-white to-white shadow-md rounded-lg"
+	class="flex flex-col md:flex-row md:space-x-6 md:items-center min-h-96 p-6 bg-white shadow-md rounded-xl"
 >
 	<div class="md:w-1/2 flex justify-center items-center">
 		<img src={item.image} alt="{item.itemName}-preview" class="w-64 h-64 object-cover rounded-lg" />
@@ -43,13 +43,9 @@
 							(parseInt(item.itemPrice) * item.discount) / 100
 						).toFixed(2)}
 					</span>
-					<span class="text-gray-500 line-through ml-2">
-						MVR {item.itemPrice}
-					</span>
+					<span class="text-gray-500 line-through ml-2">MVR {item.itemPrice}</span>
 				{:else}
-					<span class="text-green-500">
-						MVR {item.itemPrice}
-					</span>
+					<span class="text-green-500">MVR {item.itemPrice}</span>
 				{/if}
 			</div>
 			<div class="pt-4">
@@ -57,6 +53,15 @@
 			</div>
 		</section>
 	</div>
+</div>
+
+<div class="bg-surface-500 p-6 mt-6 rounded-xl flex justify-center space-x-4">
+	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+		Share via Viber
+	</button>
+	<button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
+		Pay Online
+	</button>
 </div>
 
 <style>

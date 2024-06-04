@@ -1,8 +1,11 @@
 <script>
 	import Card from '$lib/components/Card.svelte';
+	import Meta from '$lib/components/Meta.svelte';
 	import { ShopDescription, ShopDescriptionLong, ShopName, ShopTagLine } from '$lib/constants';
 	import { Avatar } from '@skeletonlabs/skeleton';
 </script>
+
+<Meta title="Home" />
 
 <div class="space-y-4">
 	<Card padding="p-2">

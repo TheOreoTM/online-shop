@@ -12,3 +12,11 @@ export type Item = {
 	status: string;
 	discount?: number;
 };
+
+export type CartItem = {
+	id: string;
+	name: string;
+	price: number;
+	quantity: number;
+	discount?: number;
+};
