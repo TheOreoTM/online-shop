@@ -17,10 +17,15 @@ export async function addItemToCart(itemCode: string) {
 			}
 			existingItem.quantity += 1;
 		} else {
+			let price = parseFloat(item.itemPrice);
+			if (item.discount) {
+				price = price - (price * item.discount) / 100;
+			}
+
 			items.push({
 				id: item.itemCode,
 				name: item.itemName,
-				price: parseFloat(item.itemPrice),
+				price: price,
 				quantity: 1
 			});
 		}

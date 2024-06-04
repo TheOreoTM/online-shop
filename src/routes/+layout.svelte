@@ -44,7 +44,7 @@
 </script>
 
 <ShoppingCart />
-<Toaster position="bottom-center" richColors />
+<Toaster position="top-center" richColors />
 <!-- App Shell -->
 <AppShell
 	slotPageHeader="mx-auto container p-4 bg-transparent"
