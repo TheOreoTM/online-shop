@@ -1,5 +1,5 @@
 import { cart } from '$lib/stores/cart';
-import { getItemByCode } from './utils';
+import { getItemByCode } from '$lib/utils';
 
 export async function addItemToCart(itemCode: string) {
 	const item = await getItemByCode(itemCode);
@@ -26,7 +26,8 @@ export async function addItemToCart(itemCode: string) {
 				id: item.itemCode,
 				name: item.itemName,
 				price: price,
-				quantity: 1
+				quantity: 1,
+				code: item.itemCode
 			});
 		}
 		return items;

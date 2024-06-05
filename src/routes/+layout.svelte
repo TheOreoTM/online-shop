@@ -31,6 +31,7 @@
 	import { page } from '$app/stores';
 	import { ShopName } from '$lib/constants';
 	import ShoppingCart from '$lib/components/ShoppingCart.svelte';
+	import ShoppingBag from '$lib/components/ShoppingBag.svelte';
 
 	$: isActivePath = (path: string) => {
 		if (path === '/shop' && $page.url.pathname.startsWith('/shop')) {
@@ -43,7 +44,7 @@
 	export let data;
 </script>
 
-<ShoppingCart />
+<ShoppingBag />
 <Toaster position="top-center" richColors />
 <!-- App Shell -->
 <AppShell

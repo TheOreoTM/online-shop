@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { addItemToCart } from '$lib/functions/cart';
 	import { loading } from '$lib/stores/loading';
-	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { Item } from '$lib/types';
 	import type { PageData } from './$types';
 	import { cart } from '$lib/stores/cart';
@@ -10,7 +9,6 @@
 	export let data: PageData;
 
 	const items = data.items;
-	const toastStore = getToastStore();
 
 	async function addItem(item: Item) {
 		const targetItem = $cart.find((i) => i.id === item.itemCode);
@@ -42,7 +40,7 @@
 	}
 
 	function outOfStock(itemName: string) {
-		toast.error(`${itemName.toUpperCase()} is out of stock`);
+		toast.warning(`${itemName.toUpperCase()} is out of stock`);
 	}
 </script>
 
