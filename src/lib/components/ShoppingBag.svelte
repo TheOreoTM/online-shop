@@ -50,7 +50,7 @@
 	const counterFlyOptions = { y: 10, duration: 300, easing: expoInOut };
 </script>
 
-<div class="relative inline-block z-40">
+<div class="relative inline-block z-[1000]">
 	<Dialog.Root>
 		<Dialog.Trigger
 			><button
@@ -66,9 +66,9 @@
 		>
 		<Dialog.Content class="bg-surface-800 rounded-md">
 			<Dialog.Header>
-				<Dialog.Title>Your Bag</Dialog.Title>
+				<Dialog.Title>Your Bag - MVR {total.toFixed(2)}</Dialog.Title>
 				<Dialog.Description>
-					<div>
+					<div class="max-h-96 overflow-auto">
 						<div
 							class="grid grid-cols-3 items-center gap-4 font-semibold border-b-2 border-dashed pb-3 mb-3"
 						>
@@ -77,7 +77,17 @@
 							<div class="text-left">Price</div>
 						</div>
 						{#each $cart as item (item.id)}
-							<div class="grid grid-cols-3 items-center gap-4 mb-4">
+							<div
+								animate:flip={{ delay: 200, duration: 600, easing: expoInOut }}
+								transition:fly={{
+									delay: 100,
+									duration: 600,
+									x: 500,
+									opacity: 0.1,
+									easing: expoInOut
+								}}
+								class="grid grid-cols-3 items-center gap-4 mb-4"
+							>
 								<div class="grid place-items-center lg:flex lg:place-content-center">
 									<div class="text-sm whitespace-break-spaces ml-2 capitalize">
 										<p>{item.name}</p>
@@ -95,6 +105,7 @@
 									<span style="">MVR {item.quantity * item.price}</span>
 									<div class="hidden sm:block ml-auto">
 										<button
+											on:click={() => discardItem(item)}
 											class="text-xl fa-solid fa-trash-can text-red-500 hover:text-red-600 active:text-red-800"
 										>
 										</button>

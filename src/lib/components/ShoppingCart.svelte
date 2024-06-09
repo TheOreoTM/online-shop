@@ -136,7 +136,6 @@
 									max="99"
 									class="border rounded text-gray-500 w-16 pl-2 py-1"
 									type="number"
-									autofocus={false}
 								/>
 								<div class="flex items-center">
 									<span style="">MVR {item.quantity * item.price}</span>
