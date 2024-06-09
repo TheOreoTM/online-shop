@@ -78,3 +78,53 @@ export async function getItems({ offset = 0, limit = 10, search = '' }): Promise
 export function getItemImage(code: string): string {
 	return `https://www.ihurufihaara.com/store/assets/img/${code}.png`;
 }
+
+import { typeid } from 'typeid-js';
+import type { TypeID } from 'typeid-js';
+
+export function generatePrefixedId<T extends string>(prefix: T): TypeID<T> {
+	const typeidLength = 26;
+
+	// I don't allow IDs to be longer than 36 characters in my columns.
+	// Change to your liking or implement it per id.
+	const maxLenPrefix = 36 - typeidLength - 1;
+
+	if (prefix.length > maxLenPrefix) {
+		throw new Error(`Prefix too long. Max length is ${maxLenPrefix}.`);
+	}
+
+	return typeid(prefix);
+}
+
+/**
+ * https://www.ietf.org/archive/id/draft-peabody-dispatch-new-uuid-format-04.html#name-uuid-version-7
+ */
+export function uuidv7(): string {
+	return typeid().toString();
+}
+
+// This could be moved to the User model?
+export function generateUserId(): TypeID<'user'> {
+	return generatePrefixedId<'user'>('user');
+}
+
+import { OAuthRequestError } from '@lucia-auth/oauth';
+
+// Taken from Lucia.
+// Need it to make manual requests to some providers.
+export async function handleRequest<T>(request: Request) {
+	request.headers.set('User-Agent', 'lucia');
+	request.headers.set('Accept', 'application/json');
+
+	const response = await fetch(request);
+
+	if (!response.ok) {
+		throw new OAuthRequestError(request, response);
+	}
+
+	return (await response.json()) as T;
+}
+
+export function doesRouteRequireAuthorisation(routeId: string): boolean {
+	return routeId.startsWith('/(protected)');
+}
