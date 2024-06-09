@@ -15,7 +15,7 @@
 
 	import { Toaster } from '$lib/components/ui/sonner';
 
-	import { initializeStores } from '@skeletonlabs/skeleton';
+	import { initializeStores, Toast } from '@skeletonlabs/skeleton';
 
 	initializeStores();
 
@@ -30,6 +30,7 @@
 	import PageTransition from '$lib/components/PageTransition.svelte';
 	import { page } from '$app/stores';
 	import { ShopName } from '$lib/constants';
+	import ShoppingCart from '$lib/components/ShoppingCart.svelte';
 	import ShoppingBag from '$lib/components/ShoppingBag.svelte';
 
 	$: isActivePath = (path: string) => {
