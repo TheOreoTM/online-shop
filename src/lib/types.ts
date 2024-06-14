@@ -21,3 +21,9 @@ export type CartItem = {
 	discount?: number;
 	code: string;
 };
+
+export const enum Roles {
+	Admin = 'ADMIN',
+	User = 'USER',
+	Guest = 'GUEST'
+}
