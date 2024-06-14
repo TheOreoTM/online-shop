@@ -15,31 +15,16 @@
 
 	import { Toaster } from '$lib/components/ui/sonner';
 
-	import { initializeStores, Toast } from '@skeletonlabs/skeleton';
+	import { initializeStores } from '@skeletonlabs/skeleton';
 
 	initializeStores();
 
-	const navLinks = [
-		{ path: '/shop', label: 'Shop', isNew: true },
-		{ path: '/', label: 'Home' },
-		{ path: '/telegram', label: 'Telegram' },
-		{ path: '/viber', label: 'Viber' },
-		{ path: '/call', label: 'Call' }
-	];
-
 	import PageTransition from '$lib/components/PageTransition.svelte';
-	import { page } from '$app/stores';
 	import { ShopName } from '$lib/constants';
-	import ShoppingCart from '$lib/components/ShoppingCart.svelte';
 	import ShoppingBag from '$lib/components/ShoppingBag.svelte';
-
-	$: isActivePath = (path: string) => {
-		if (path === '/shop' && $page.url.pathname.startsWith('/shop')) {
-			return true;
-		}
-
-		return $page.url.pathname === path;
-	};
+	import UserDropdown from '$lib/components/UserDropdown.svelte';
+	import LoginButton from '$lib/components/LoginButton.svelte';
+	import HamburgerMenu from '$lib/components/HamburgerMenu.svelte';
 
 	export let data;
 </script>
@@ -58,16 +43,24 @@
 				<strong class="text-lg">{ShopName}</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<nav class="flex space-x-8 font-semibold">
-					{#each navLinks as { label, path, isNew } (path)}
-						<a class={`${isActivePath(path) ? 'text-base' : 'opacity-60'}`} href={path}
-							>{label}
-							{#if isNew}
-								<span class="badge variant-soft-warning">New</span>
-							{/if}
-						</a>
-					{/each}
-				</nav>
+				{#await data.streamed.user}
+					<LoginButton />
+				{:then user}
+					{#if user}
+						<div class="hidden md:flex">
+							<UserDropdown {user} />
+						</div>
+					{:else}
+						<LoginButton />
+					{/if}
+				{/await}
+			</svelte:fragment>
+			<svelte:fragment slot="trail-mobile">
+				{#await data.streamed.user}
+					<LoginButton />
+				{:then user}
+					<HamburgerMenu {user} />
+				{/await}
 			</svelte:fragment>
 		</NavBar>
 	</svelte:fragment>

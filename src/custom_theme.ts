@@ -97,5 +97,6 @@ export const custom_theme: CustomThemeConfig = {
 		'--color-surface-700': '21 21 23', // #151517
 		'--color-surface-800': '17 17 18', // #111112
 		'--color-surface-900': '14 14 15' // #0e0e0f
+		// shadcn-svelte-ui
 	}
 };

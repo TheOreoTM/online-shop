@@ -1,4 +1,10 @@
 <script lang="ts">
+	import type { User } from 'lucia';
+	import UserDropdown from './UserDropdown.svelte';
+	import { page } from '$app/stores';
+	import { NavLinks } from '$lib/constants';
+	import HamburgerMenu from './HamburgerMenu.svelte';
+
 	$: classesBase = `flex flex-col bg-surface-500 rounded-full space-y-4 p-3 px-6 ${$$props.class ?? ''}`;
 	$: classesRowMain = `grid items-center grid-cols-[auto_1fr_auto] gap-4 `;
 	$: classesRowHeadline = ``;
@@ -8,6 +14,22 @@
 
 	const hamburgerMenu = () => {
 		console.log('hamburgerMenu');
+	};
+
+	const navLinks = [
+		{ path: '/shop', label: 'Shop', isNew: true },
+		{ path: '/', label: 'Home' },
+		{ path: '/telegram', label: 'Telegram' },
+		{ path: '/viber', label: 'Viber' },
+		{ path: '/call', label: 'Call' }
+	];
+
+	export const isActivePath = (path: string) => {
+		if (path === '/shop' && $page.url.pathname.startsWith('/shop')) {
+			return true;
+		}
+
+		return $page.url.pathname === path;
 	};
 </script>
 
@@ -23,10 +45,22 @@
 		<!-- Slot: trail -->
 		{#if $$slots.trail}
 			<!-- Big -->
-			<div class="app-bar-slot-trail hidden md:flex {classesSlotTrail}"><slot name="trail" /></div>
+			<div class="app-bar-slot-trail hidden md:flex {classesSlotTrail}">
+				<nav class="flex space-x-8 font-semibold items-center">
+					{#each NavLinks as { label, path, isNew } (path)}
+						<a class={`${isActivePath(path) ? 'text-base' : 'opacity-60'}`} href={path}
+							>{label}
+							{#if isNew}
+								<span class="badge variant-soft-warning">New</span>
+							{/if}
+						</a>
+					{/each}
+					<slot name="trail" />
+				</nav>
+			</div>
 			<!-- Mobile -->
 			<div class="app-bar-slot-trail md:hidden {classesSlotTrail}">
-				<button on:click={hamburgerMenu}><i class="fa-solid fa-burger text-xl"></i></button>
+				<slot name="trail-mobile" />
 			</div>
 		{/if}
 	</div>
