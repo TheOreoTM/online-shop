@@ -8,7 +8,7 @@
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
-		<Button builders={[builder]} class="btn variant-ghost-primary rounded-full">
+		<Button builders={[builder]} variant="secondary" class="btn variant-ghost-primary rounded-full">
 			<span>{user.name}</span>
 		</Button>
 	</DropdownMenu.Trigger>

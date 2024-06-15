@@ -12,7 +12,15 @@ export default {
 		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				border: 'hsl(240 3.7% 15.9% / <alpha-value>)',
+				muted: {
+					DEFAULT: 'hsl(240 3.7% 15.9% / <alpha-value>)',
+					foreground: 'hsl(0 0% 100% / 0.6)'
+				}
+			}
+		}
 	},
 	plugins: [
 		forms,

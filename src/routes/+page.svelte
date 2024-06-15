@@ -1,5 +1,4 @@
 <script>
-	import Card from '$lib/components/Card.svelte';
 	import Meta from '$lib/components/Meta.svelte';
 	import { ShopDescription, ShopDescriptionLong, ShopName, ShopTagLine } from '$lib/constants';
 	import { Avatar } from '@skeletonlabs/skeleton';
@@ -8,8 +7,8 @@
 <Meta title="Home" />
 
 <div class="space-y-4">
-	<Card padding="p-2">
-		<svelte:fragment slot="header">
+	<div class="card !ring-0 !bg-surface-500 p-2">
+		<header class="card-header">
 			<div class="flex flex-row items-center space-x-6">
 				<Avatar src="https://api.dicebear.com/8.x/pixel-art/svg" width="w-20" />
 				<div class="space-y-3">
@@ -17,8 +16,8 @@
 					<p class="text-xs badge bg-surface-800/60">{ShopTagLine}</p>
 				</div>
 			</div>
-		</svelte:fragment>
-		<svelte:fragment slot="body">
+		</header>
+		<section class="p-4">
 			<div class="flex flex-col space-y-6">
 				<div>
 					<div
@@ -42,18 +41,19 @@
 					</a>
 				</div>
 			</div>
-		</svelte:fragment>
-	</Card>
-	<Card padding="p-2">
-		<svelte:fragment slot="header">
+		</section>
+	</div>
+
+	<div class={`card !ring-0 !bg-surface-500  p-2 `}>
+		<header class="card-header">
 			<div class="flex flex-row items-center space-x-6">
 				<h1 class="h2 font-bold">Extra Info</h1>
 			</div>
-		</svelte:fragment>
-		<svelte:fragment slot="body">
+		</header>
+		<section class="p-4">
 			{ShopDescriptionLong} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, deleniti delectus
 			eveniet excepturi voluptas harum dolorem, est nemo facilis quisquam, fuga quod dolores corporis
 			tenetur consequatur possimus voluptatem sunt? Exercitationem?
-		</svelte:fragment>
-	</Card>
+		</section>
+	</div>
 </div>

@@ -1,9 +1,6 @@
 <script lang="ts">
-	import type { User } from 'lucia';
-	import UserDropdown from './UserDropdown.svelte';
 	import { page } from '$app/stores';
 	import { NavLinks } from '$lib/constants';
-	import HamburgerMenu from './HamburgerMenu.svelte';
 
 	$: classesBase = `flex flex-col bg-surface-500 rounded-full space-y-4 p-3 px-6 ${$$props.class ?? ''}`;
 	$: classesRowMain = `grid items-center grid-cols-[auto_1fr_auto] gap-4 `;
@@ -12,19 +9,7 @@
 	$: classesSlotDefault = `flex-auto `;
 	$: classesSlotTrail = `flex-none flex items-center space-x-4`;
 
-	const hamburgerMenu = () => {
-		console.log('hamburgerMenu');
-	};
-
-	const navLinks = [
-		{ path: '/shop', label: 'Shop', isNew: true },
-		{ path: '/', label: 'Home' },
-		{ path: '/telegram', label: 'Telegram' },
-		{ path: '/viber', label: 'Viber' },
-		{ path: '/call', label: 'Call' }
-	];
-
-	export const isActivePath = (path: string) => {
+	$: isActivePath = (path: string) => {
 		if (path === '/shop' && $page.url.pathname.startsWith('/shop')) {
 			return true;
 		}
@@ -48,7 +33,7 @@
 			<div class="app-bar-slot-trail hidden md:flex {classesSlotTrail}">
 				<nav class="flex space-x-8 font-semibold items-center">
 					{#each NavLinks as { label, path, isNew } (path)}
-						<a class={`${isActivePath(path) ? 'text-base' : 'opacity-60'}`} href={path}
+						<a class={`${isActivePath(path) ? 'text-white' : 'text-muted-foreground'}`} href={path}
 							>{label}
 							{#if isNew}
 								<span class="badge variant-soft-warning">New</span>

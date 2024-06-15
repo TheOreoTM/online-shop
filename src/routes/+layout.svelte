@@ -33,7 +33,7 @@
 <Toaster position="top-center" richColors />
 <!-- App Shell -->
 <AppShell
-	slotPageHeader="mx-auto container p-4 bg-transparent"
+	slotPageHeader="mx-auto container px-4 pb-4  bg-transparent"
 	slotPageContent="container mx-auto px-4 pb-10"
 >
 	<svelte:fragment slot="pageHeader">
